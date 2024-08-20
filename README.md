@@ -1,7 +1,7 @@
 # ADM_FD_solver
 Matlab scripts for solving numerically the steady, variable-coefficient Advection-Diffusion-Migration (ADM) equation by a finite difference approximation in 1D, 2D or 3D in a cylindrical coordinate system over non-uniform structured grids. The discretized equation takes the form:
 
-$$ A \nabla^2 q + B \nabla q - C q = r$$, 
+$$ A \nabla^2 q + B \nabla q - C q = r \, $$ 
 
 $$ \frac{\partial \rho}{\partial t} + \nabla \cdot \vec{j} = 0 \,. \label{eq:continuity} $$
 
