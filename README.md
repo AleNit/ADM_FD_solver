@@ -3,6 +3,8 @@ Matlab scripts for solving numerically the steady, variable-coefficient Advectio
 
 $$ A \nabla^2 q + B \nabla q - C q = r$$, 
 
+$$ \frac{\partial \rho}{\partial t} + \nabla \cdot \vec{j} = 0 \,. \label{eq:continuity} $$
+
 where $$A$$, $$B$$ and $$C$$ are non-constant scalar fields.
 Derivatives are approximated by a 2-nd order accurate centered difference over a cell-centered grid. Grid stretching can be prescribed. Dirichelet/Neumann/periodic boundary conditions are prescribed by a ghost cell method. The generic boundary condition is formulated as a Robin condition. The linear system arising from 1D and 2D examples is solved by a direct method, whereas that arising from the 3D example is solved by the BICGSTAB algorithm.
 
