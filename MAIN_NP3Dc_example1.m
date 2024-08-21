@@ -57,8 +57,6 @@ gz=getgrid(Lz,nz,'lin',false(1));
 ndof=(nr-1)*(nt-1)*(nz-1);
 
 kf=plotgrid(gr.xn,gt.xn,gz.xn,Lr,Lz,kf);
-
-% kf=plotgrid(gr.xn,gt.xn,gz.xn,Lr,Lz,kf);
 disp(['ndof = ',num2str(ndof)])
 
 % assemble coefficient matrix
