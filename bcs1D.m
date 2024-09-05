@@ -13,8 +13,13 @@ cA=coeffA(gr.xp(i));
 cB=coeffBr(gr.xp(i));
 d=1/( gr.dxc(i)*gr.dxc(ip)*( gr.dxc(i) + gr.dxc(ip) ) );
 
-c1=(2*vali(2)+vali(1)*gr.dxc(i))/(2*vali(2)-vali(1)*gr.dxc(i));
-c2=-2*vali(3)*gr.dxc(i)/(2*vali(2)-vali(1)*gr.dxc(i));
+den=(gr.dxc(1)-gr.dxn(1)/2)*gr.dxn(1)/2*gr.dxc(1);
+dp=(gr.dxc(1)-gr.dxn(1)/2)^2/den;
+dm=(gr.dxn(1)/2)^2/den;
+dd=( (gr.dxn(1)/2)^2 - (gr.dxc(1)-gr.dxn(1)/2)^2 )/den;
+c1=( vali(2)*dp + (2*gr.dxc(1)-gr.dxn(1))/2/gr.dxc(1)*( vali(1)+vali(2)*dd ) )/ ...
+   ( vali(2)*dm + ( (2*gr.dxc(1)-gr.dxn(1))/2/gr.dxc(1)-1 )*( vali(1)+vali(2)*dd ) );
+c2= - vali(3) / ( vali(2)*dm + ( (2*gr.dxc(1)-gr.dxn(1))/2/gr.dxc(1)-1 )*( vali(1)+vali(2)*dd ) );
 
 A(i, i)     =  cA + cB*d*(gr.dxc(ip)^2-gr.dxc(i)^2) ...
                - cD/(gr.dxn(i)*gr.dxc(ip)) - cD/(gr.dxn(i)*gr.dxc(i)) ...
@@ -31,8 +36,13 @@ cA=coeffA(gr.xp(i));
 cB=coeffBr(gr.xp(i));
 d=1/( gr.dxc(i)*gr.dxc(ip)*( gr.dxc(i) + gr.dxc(ip) ) );
 
-c3=(-2*vale(2)+vale(1)*gr.dxc(i+1))/(-2*vale(2)-vale(1)*gr.dxc(i+1));
-c4=-2*vale(3)*gr.dxc(i+1)/(-2*vale(2)-vale(1)*gr.dxc(i+1));
+den=(gr.dxc(nx)-gr.dxn(nx-1)/2)*gr.dxn(nx-1)/2*gr.dxc(nx);
+dp=(gr.dxn(nx-1)/2)^2/den;
+dm=(gr.dxc(nx)-gr.dxn(nx-1)/2)^2/den;
+dd=( (gr.dxc(nx)-gr.dxn(nx-1)/2)^2 - (gr.dxn(nx-1)/2)^2 )/den;
+c3=( vale(2)*dm + ( gr.dxn(nx-1)/2/gr.dxc(nx)-1 )*( vale(1)+vale(2)*dd ) )/ ...
+( vale(2)*dp + gr.dxn(nx-1)/2/gr.dxc(nx)*( vale(1)+vale(2)*dd ) );
+c4= vale(3) / ( vale(2)*dp + gr.dxn(nx-1)/2/gr.dxc(nx)*( vale(1)+vale(2)*dd ) );
 
 A(i, i)     =  cA + cB*d*(gr.dxc(ip)^2-gr.dxc(i)^2) ...
                - cD/(gr.dxn(i)*gr.dxc(ip)) - cD/(gr.dxn(i)*gr.dxc(i)) ...

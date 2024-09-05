@@ -20,7 +20,7 @@ indkp=2:nz;     indkp(end)=1;
 indkm=0:nz-2;   indkm(1)=nz-1;
 
 
-% initial boundary - mirror value
+%% initial boundary - mirror value
 i=1;
 ip=i+1;
 d=1/( gr.dxc(i)*gr.dxc(ip)*( gr.dxc(i) + gr.dxc(ip) ) );
@@ -91,10 +91,16 @@ end
 
 
 
-% final boundary
+%% final boundary
 i=nr-1;
 ip=i+1;
 d=1/( gr.dxc(i)*gr.dxc(ip)*( gr.dxc(i) + gr.dxc(ip) ) );
+
+% metrics for the boundary conditions
+den=(gr.dxc(nr)-gr.dxn(nr-1)/2)*gr.dxn(nr-1)/2*gr.dxc(nr);
+dp=(gr.dxn(nr-1)/2)^2/den;
+dm=(gr.dxc(nr)-gr.dxn(nr-1)/2)^2/den;
+dd=( (gr.dxc(nr)-gr.dxn(nr-1)/2)^2 - (gr.dxn(nr-1)/2)^2 )/den;
 
 for k=1:nz-1
     kp=indkp(k);
@@ -116,9 +122,10 @@ for k=1:nz-1
         ckp = (nr-1)*(nt-1)*(kp-1) + (nr-1)*(j-1)  + i;
         ckm = (nr-1)*(nt-1)*(km-1) + (nr-1)*(j-1)  + i;
 
-        c3=(-2*vale(j,k,2)+vale(j,k,1)*gr.dxc(ip))/(-2*vale(j,k,2)-vale(j,k,1)*gr.dxc(ip));
-        c4=-2*vale(j,k,3)*gr.dxc(ip)/(-2*vale(j,k,2)-vale(j,k,1)*gr.dxc(ip));
-
+        c3=( vale(j,k,2)*dm + ( gr.dxn(nr-1)/2/gr.dxc(nr)-1 )*( vale(j,k,1)+vale(j,k,2)*dd ) )/ ...
+           ( vale(j,k,2)*dp + gr.dxn(nr-1)/2/gr.dxc(nr)*( vale(j,k,1)+vale(j,k,2)*dd ) );
+        c4= vale(j,k,3) / ( vale(j,k,2)*dp + gr.dxn(nr-1)/2/gr.dxc(nr)*( vale(j,k,1)+vale(j,k,2)*dd ) );
+        
         I(h)    =   c;
         J(h)    =   c;    
         VA(h)   =   cA + cBr*(gr.dxc(ip)^2 - gr.dxc(i)^2)*d + ...
